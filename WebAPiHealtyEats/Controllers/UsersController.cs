@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Net;
+using WebApiHealtyEats.Models;
 using WebAPiHealtyEats.Models;
 using WebAPiHealtyEats.Models.Dtos;
 using WebAPiHealtyEats.Repository;
@@ -127,6 +128,33 @@ namespace WebAPiHealtyEats.Controllers
                 return StatusCode((int)HttpStatusCode.InternalServerError, _responseApi);
             }
         }
+
+        [HttpPut("{userId:int}")]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        public async Task<IActionResult> UpdateUser(int userId, [FromBody] UserUptade userDto)
+        {
+            if (userDto == null)
+            {
+                return BadRequest("User data is missing");
+            }
+
+            User existingUser = _userRepository.GetUser(userId);
+            if (existingUser == null)
+            {
+                return NotFound();
+            }
+
+            existingUser.UserName = userDto.UserName;
+            existingUser.Email = userDto.Email;
+            existingUser.Name = userDto.Name;
+
+            await _userRepository.UpdateUser(userId, existingUser);
+
+            return NoContent();
+        }
+
 
 
     }

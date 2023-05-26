@@ -120,5 +120,18 @@ namespace WebAPiHealtyEats.Repository
 
             return response;
         }
+
+        public async Task UpdateUser(int id, User userDto)
+        {
+            var user =  GetUser(id);
+            if (user != null)
+            {
+                user.UserName = userDto.UserName;
+                user.Email = userDto.Email;
+                user.Name = userDto.Name;
+                await _dataBase.SaveChangesAsync();
+            }
+        }
+
     }
 }

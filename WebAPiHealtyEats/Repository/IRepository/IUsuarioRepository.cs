@@ -17,5 +17,7 @@ namespace WebAPiHealtyEats.Repository.IRepository
 
         Task<User> Register(UserDtoRegistro userDtoRegistro);
 
+        Task UpdateUser(int id, User userDto);
+
     }
 }
