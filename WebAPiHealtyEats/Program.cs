@@ -1,6 +1,7 @@
 using AutoMapper;
 using Microsoft.EntityFrameworkCore;
 using WebApiHealtyEats.Data;
+using WebAPiHealtyEats.Mapper;
 using WebAPiHealtyEats.Repository;
 using WebAPiHealtyEats.Repository.IRepository;
 using WebAPiHealtyEats.UserMapper;
@@ -15,9 +16,12 @@ builder.Services.AddSwaggerGen();
 
 // Agregar los repositorios 
 builder.Services.AddScoped<IUsuarioRepository, UserRepository>();
+builder.Services.AddScoped<IRestaurantRepository, RestaurantRepository>();
 
 // Add AutoMapper
 builder.Services.AddAutoMapper(typeof(UserMapper));
+builder.Services.AddAutoMapper(typeof(RestaurantMapper));
+builder.Services.AddAutoMapper(typeof(HealthStatusMapper));
 
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));

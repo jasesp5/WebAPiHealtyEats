@@ -2,6 +2,7 @@
 
 namespace WebAPiHealtyEats.Models
 {
+    
     public class ResponseApi
     {
         public ResponseApi()
@@ -19,3 +20,4 @@ namespace WebAPiHealtyEats.Models
 
     }
 }
+

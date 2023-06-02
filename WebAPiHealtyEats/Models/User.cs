@@ -16,7 +16,7 @@ namespace WebApiHealtyEats.Models
 
         public string Password { get; set; }
 
-
+    
 
     }
 }
