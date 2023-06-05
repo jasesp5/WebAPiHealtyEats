@@ -33,6 +33,7 @@ namespace WebAPiHealtyEats.Repository
             return restaurant;
         }
 
+
         public Restaurant GetRestaurant(int idRestaurant)
         {
             return _dataBase.Restaurant.FirstOrDefault(restaurant => restaurant.Id == idRestaurant);

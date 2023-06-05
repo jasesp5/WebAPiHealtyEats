@@ -28,7 +28,7 @@ namespace WebAPiHealtyEats.Controllers
         [HttpGet]
         [ProducesResponseType(StatusCodes.Status403Forbidden)]
         [ProducesResponseType(StatusCodes.Status200OK)]
-        public IActionResult GetUsers()
+        public IActionResult GetRetaurants()
         {
             var listUsers = _restaurantRepository.GetRetaurants();
 
@@ -40,7 +40,21 @@ namespace WebAPiHealtyEats.Controllers
             }
             return Ok(listRestaurants);
         }
+        [HttpGet("{id}")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        public IActionResult GetRestaurantById(int id)
+        {
+            var restaurant = _restaurantRepository.GetRestaurant(id);
 
+            if (restaurant == null)
+            {
+                return NotFound();
+            }
+
+            var restaurantDto = _mapper.Map<RestaurantDto>(restaurant);
+            return Ok(restaurantDto);
+        }
 
         [HttpPost("addRestaurant")]
         [ProducesResponseType(StatusCodes.Status201Created)]
@@ -63,5 +77,8 @@ namespace WebAPiHealtyEats.Controllers
             _responseApi.IsSucess = true;
             return Ok(_responseApi);
         }
+
+    
+
     }
 }
