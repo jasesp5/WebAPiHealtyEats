@@ -78,7 +78,29 @@ namespace WebAPiHealtyEats.Controllers
             return Ok(_responseApi);
         }
 
-    
+        [HttpGet("ByCity/{city}")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        public  IActionResult GetRestaurantsByCity(string city)
+        {
+            var restaurants =   _restaurantRepository.GetRetaurantsByCity(city);
+            if (restaurants == null || restaurants.Count == 0)
+            {
+                return NotFound();
+            }
+            var restaurantDtos = _mapper.Map<List<RestaurantDto>>(restaurants);
+            return Ok(restaurantDtos);
+        }
+
+        [HttpGet("AllCities")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        public IActionResult GetAllCities()
+        {
+            var cities = _restaurantRepository.GetAllCities();
+            return Ok(cities);
+        }
+
+
 
     }
 }

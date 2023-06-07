@@ -33,6 +33,13 @@ namespace WebAPiHealtyEats.Repository
             return restaurant;
         }
 
+        public ICollection<string> GetAllCities()
+        {
+            return _dataBase.Restaurant.OrderBy(restaurant => restaurant.City)
+                                      .Select(restaurant => restaurant.City)
+                                      .ToList();
+
+        }
 
         public Restaurant GetRestaurant(int idRestaurant)
         {
@@ -42,6 +49,12 @@ namespace WebAPiHealtyEats.Repository
         public ICollection<Restaurant> GetRetaurants()
         {
             return _dataBase.Restaurant.OrderBy(restaurant => restaurant.Name).ToList();
+        }
+
+        public ICollection<Restaurant> GetRetaurantsByCity(string city)
+        {
+            return _dataBase.Restaurant.Where(restaurant => restaurant.City == city)
+                                         .ToList();
         }
     }
 }

@@ -17,6 +17,7 @@ builder.Services.AddSwaggerGen();
 // Agregar los repositorios 
 builder.Services.AddScoped<IUsuarioRepository, UserRepository>();
 builder.Services.AddScoped<IRestaurantRepository, RestaurantRepository>();
+builder.Services.AddScoped<IHealthStatusRepository, HealthStatusRepository>();
 
 // Add AutoMapper
 builder.Services.AddAutoMapper(typeof(UserMapper));

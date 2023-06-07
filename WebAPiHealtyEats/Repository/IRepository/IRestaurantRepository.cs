@@ -8,8 +8,8 @@ namespace WebAPiHealtyEats.Repository.IRepository
         ICollection<Restaurant> GetRetaurants();
 
         Restaurant GetRestaurant(int idRestaurant);
-
-
+        ICollection<Restaurant> GetRetaurantsByCity(string city);
+        ICollection<string> GetAllCities();
         Task<Restaurant> AddRestaurant(RestaurantDto restaurantDto);
 
     }
