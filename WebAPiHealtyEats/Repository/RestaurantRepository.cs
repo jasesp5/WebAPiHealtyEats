@@ -37,6 +37,7 @@ namespace WebAPiHealtyEats.Repository
         {
             return _dataBase.Restaurant.OrderBy(restaurant => restaurant.City)
                                       .Select(restaurant => restaurant.City)
+                                       .Distinct()
                                       .ToList();
 
         }
@@ -54,7 +55,7 @@ namespace WebAPiHealtyEats.Repository
         public ICollection<Restaurant> GetRetaurantsByCity(string city)
         {
             return _dataBase.Restaurant.Where(restaurant => restaurant.City == city)
-                                         .ToList();
+                             .ToList();
         }
     }
 }
